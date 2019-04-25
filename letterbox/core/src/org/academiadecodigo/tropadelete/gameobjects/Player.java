@@ -87,4 +87,8 @@ public class Player extends GameObjects {
     public void setJump(boolean jump) {
         this.jump = jump;
     }
+
+    public void setStandOnGround(boolean standOnGround) {
+        this.standOnGround = standOnGround;
+    }
 }
