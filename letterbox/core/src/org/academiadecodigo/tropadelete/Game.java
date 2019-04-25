@@ -10,56 +10,69 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import org.academiadecodigo.tropadelete.gameobjects.Player;
+import org.w3c.dom.css.Rect;
+
+import java.sql.ResultSet;
 
 public class Game extends ApplicationAdapter {
-	SpriteBatch batch;
-	Player player;
-	InputHandler inputHandler;
-	OrthographicCamera camera;
+    SpriteBatch batch;
+    Player player;
+    InputHandler inputHandler;
+    OrthographicCamera camera;
 
-	
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-
-		player = new Player(new Texture("badlogic.jpg"),new Rectangle());
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false,800,480);
-
-		inputHandler = new InputHandler(player);
-
-	}
-
-	@Override
-	public void render () {
-
-		camera.update();
-
-		createImage();
-		inputHandler.keyboardListener();
-		player.jump();
-
-	}
+    @Override
+    public void create() {
+        batch = new SpriteBatch();
 
 
-	@Override
-	public void dispose () {
+        player = new Player(new Texture("player_girl/step1_girl.png"), new Rectangle());
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 800, 480);
 
-		batch.dispose();
-		player.dispose();
-	}
-
-
-	private void createImage(){
+        inputHandler = new InputHandler(player);
 
 
-		batch.setProjectionMatrix(camera.combined);
+    }
 
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(player.getImg(), player.getX(), player.getY());
-		batch.end();
-	}
+    @Override
+    public void render() {
 
+        updateCamera();
+
+        createImage();
+        inputHandler.keyboardListener();
+        player.jump();
+
+    }
+
+
+    @Override
+    public void dispose() {
+
+        batch.dispose();
+        player.dispose();
+    }
+
+    private void updateCamera() {
+        camera.position.x = player.getHitbox().x;
+        camera.position.y = player.getHitbox().y;
+        camera.update();
+
+    }
+
+
+    private void createImage() {
+
+
+        batch.setProjectionMatrix(camera.combined);
+
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(new Texture("back.jpg"), -450, -350);
+        batch.draw(player.getImg(), player.getX(), player.getY());
+
+        batch.end();
+
+    }
 }

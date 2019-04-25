@@ -7,6 +7,5 @@ public class LetterBox {
     private List<Letter> letters;
 
     public LetterBox() {
-        letters
     }
 }
