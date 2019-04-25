@@ -1,4 +1,4 @@
-package org.academiadecodigo.tropadelete.desktop.gameobjects;
+package org.academiadecodigo.tropadelete.gameobjects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
