@@ -7,6 +7,13 @@ import org.academiadecodigo.tropadelete.Game;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		
+		config.title = "LetterBox";
+		config.width = 800;
+		config.height = 400;
+
+		config.fullscreen = false;
+
 		new LwjglApplication(new Game(), config);
 	}
 }
