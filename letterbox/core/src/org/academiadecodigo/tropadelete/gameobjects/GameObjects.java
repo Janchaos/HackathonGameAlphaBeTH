@@ -56,4 +56,8 @@ public abstract class GameObjects {
         return hitbox.width;
     }
 
+    public boolean overlaps(GameObjects gameObject) {
+        return hitbox.overlaps(gameObject.hitbox);
+    }
+
 }

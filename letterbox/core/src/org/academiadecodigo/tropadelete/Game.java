@@ -12,65 +12,79 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import org.academiadecodigo.tropadelete.gameobjects.CollisionDetector;
+import org.academiadecodigo.tropadelete.gameobjects.Letter;
 import org.academiadecodigo.tropadelete.gameobjects.LetterBox;
 import org.academiadecodigo.tropadelete.gameobjects.Player;
+import org.w3c.dom.css.Rect;
+
+import java.sql.ResultSet;
 
 public class Game extends ApplicationAdapter {
-	private SpriteBatch batch;
-	private Player player;
-	private InputHandler inputHandler;
-	private OrthographicCamera camera;
-	private LetterBox letterBox;
-	private CollisionDetector collisionDetector;
-	private TiledMap tiledMap;
-	private OrthogonalTiledMapRenderer renderer;
-	
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		player = new Player(new Texture("badlogic.jpg"),new Rectangle());
-		letterBox = new LetterBox();
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false,800,480);
+    private SpriteBatch batch;
+    private Player player;
+    private InputHandler inputHandler;
+    private OrthographicCamera camera;
+    private LetterBox letterBox;
+    private CollisionDetector collisionDetector;
+    private TiledMap tiledMap;
+    private OrthogonalTiledMapRenderer renderer;
 
-		inputHandler = new InputHandler(player);
+    @Override
+    public void create() {
+        batch = new SpriteBatch();
+        player = new Player(new Texture("badlogic.jpg"), new Rectangle());
+        letterBox = new LetterBox("A");
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 800, 480);
 
-		collisionDetector = new CollisionDetector(letterBox,player);
+        inputHandler = new InputHandler(player);
 
-	}
+        collisionDetector = new CollisionDetector(letterBox, player);
 
-	@Override
-	public void render () {
+    }
 
-		camera.update();
+    @Override
+    public void render() {
 
-		createImage();
-		inputHandler.keyboardListener();
-		player.jump();
-		collisionDetector.checkCollision();
+        updateCamera();
 
-
-	}
+        createImage();
+        inputHandler.keyboardListener();
+        player.jump();
+        collisionDetector.checkCollision();
+    }
 
 
-	@Override
-	public void dispose () {
+    @Override
+    public void dispose() {
 
-		batch.dispose();
-		player.dispose();
-	}
+        batch.dispose();
+        player.dispose();
+    }
+
+    private void updateCamera() {
+        camera.position.x = player.getHitbox().x;
+        camera.position.y = player.getHitbox().y + 800 / 4; // look magic number to push camera up
+        camera.update();
+
+    }
 
 
-	private void createImage(){
+    private void createImage() {
 
 
-		batch.setProjectionMatrix(camera.combined);
+        batch.setProjectionMatrix(camera.combined);
 
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(player.getImg(), player.getX(), player.getY());
-		batch.end();
-	}
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(new Texture("back.jpg"), 0, 0);
+        for (Letter letter : letterBox.getLetters()){
+            batch.draw(letter.getImg(),letter.getX(),letter.getY());
+        }
+        batch.draw(player.getImg(), player.getX(), player.getY());
 
+        batch.end();
+
+    }
 }

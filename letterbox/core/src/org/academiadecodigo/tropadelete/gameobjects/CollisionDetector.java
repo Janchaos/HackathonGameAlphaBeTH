@@ -1,9 +1,5 @@
 package org.academiadecodigo.tropadelete.gameobjects;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
-
-import java.security.PublicKey;
-
 public class CollisionDetector {
 
     private LetterBox letterBox;
@@ -29,6 +25,16 @@ public class CollisionDetector {
 
     private void tileCollision() {
 
+    }
+
+    private void letterCollision(){
+        for (Letter letter : letterBox.getLetters()){
+            if (letter.overlaps(player)) {
+                letter.setCaught();
+                letter.dispose();
+                letter.getImg().dispose();
+            }
+        }
     }
 
 
