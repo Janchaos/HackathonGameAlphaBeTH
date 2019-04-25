@@ -7,7 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player extends GameObjects {
 
-    public final int speed = 400;
+    public final int SPEED = 300;
+    public final int JUMP_HEIGHT = 300;
+
 
     Vector2 gravity = new Vector2(0, -5);
     Vector2 velocity = new Vector2();
@@ -32,13 +34,13 @@ public class Player extends GameObjects {
 
     public void moveRight() {
         Vector2 vector2 = new Vector2();
-        vector2.x = speed;
+        vector2.x = SPEED;
         addPosition(vector2);
     }
 
     public void moveLeft() {
         Vector2 vector2 = new Vector2();
-        vector2.x = -speed;
+        vector2.x = -SPEED;
         addPosition(vector2);
     }
 
@@ -52,7 +54,7 @@ public class Player extends GameObjects {
         if (jump && canJump) {
 
             // Add an upward velocity
-            velocity.add(0, speed);
+            velocity.add(0, JUMP_HEIGHT);
 
             // Disallow jumping, so you can't jump in mid air.
             canJump = false;
@@ -67,9 +69,9 @@ public class Player extends GameObjects {
             canJump = true;
         }
 
-        // Limit fall speed
-        if (velocity.y < -20) {
-            velocity.y = -20;
+        // Limit fall SPEED
+        if (velocity.y < -200) {
+            velocity.y = -200;
         }
 
         // Add the velocity to the players position
