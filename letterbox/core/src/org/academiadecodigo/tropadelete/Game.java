@@ -2,22 +2,15 @@ package org.academiadecodigo.tropadelete;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import org.academiadecodigo.tropadelete.gameobjects.CollisionDetector;
 import org.academiadecodigo.tropadelete.gameobjects.Letter;
 import org.academiadecodigo.tropadelete.gameobjects.LetterBox;
 import org.academiadecodigo.tropadelete.gameobjects.Player;
-import org.w3c.dom.css.Rect;
-
-import java.sql.ResultSet;
 
 public class Game extends ApplicationAdapter {
     private SpriteBatch batch;
@@ -26,17 +19,16 @@ public class Game extends ApplicationAdapter {
     private OrthographicCamera camera;
     private LetterBox letterBox;
     private CollisionDetector collisionDetector;
-    private TiledMap tiledMap;
-    private OrthogonalTiledMapRenderer renderer;
+
 
     @Override
     public void create() {
+
         batch = new SpriteBatch();
         player = new Player(new Texture("badlogic.jpg"), new Rectangle());
         letterBox = new LetterBox("A");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
-
         inputHandler = new InputHandler(player);
 
         collisionDetector = new CollisionDetector(letterBox, player);
@@ -57,7 +49,6 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-
         batch.dispose();
         player.dispose();
     }
