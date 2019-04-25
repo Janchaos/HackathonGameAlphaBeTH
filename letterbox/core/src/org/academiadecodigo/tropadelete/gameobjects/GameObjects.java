@@ -12,7 +12,7 @@ public abstract class GameObjects {
         this.hitbox = hitbox;
     }
 
-    private void dispose(){
+    public void dispose(){
         img.dispose();
     }
 

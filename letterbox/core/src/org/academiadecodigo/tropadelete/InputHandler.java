@@ -3,12 +3,16 @@ package org.academiadecodigo.tropadelete;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import org.academiadecodigo.tropadelete.gameobjects.Player;
 
 public class InputHandler {
 
     private Player player;
 
-    //Falta o player
+    public InputHandler(Player player) {
+        this.player = player;
+    }
+
     public void keyboardListener() {
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -23,7 +27,8 @@ public class InputHandler {
 
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
 
-            player.jump();
+            player.setJump(true);
+
         }
     }
 
