@@ -3,7 +3,7 @@ package org.academiadecodigo.tropadelete;
 import com.badlogic.gdx.graphics.Texture;
 
 public enum LetterType {
-    A(new Texture(""), "A"),
+    A(new Texture("a.png"), 'A')/*,
     B(new Texture(""), "B"),
     C(new Texture(""), "C"),
     D(new Texture(""), "D"),
@@ -28,7 +28,7 @@ public enum LetterType {
     W(new Texture(""), "W"),
     X(new Texture(""), "X"),
     Y(new Texture(""), "Y"),
-    Z(new Texture(""), "Z");
+    Z(new Texture(""), "Z")*/;
 
     private Texture texture;
     private char charLetter;
