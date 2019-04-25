@@ -27,7 +27,7 @@ public class CollisionDetector {
 
     }
 
-    private void letterCollision(){
+    /**private void letterCollision(){
         for (Letter letter : letterBox.getLetters()){
             if (letter.overlaps(player)) {
                 letter.setCaught();
@@ -35,7 +35,7 @@ public class CollisionDetector {
                 letter.getImg().dispose();
             }
         }
-    }
+    }*/
 
 
 

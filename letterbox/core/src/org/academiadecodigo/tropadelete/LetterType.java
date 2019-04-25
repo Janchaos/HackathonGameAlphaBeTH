@@ -2,10 +2,13 @@ package org.academiadecodigo.tropadelete;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public enum LetterType {
-    A(new Texture("badlogic.jpg"), 'A');/*,
-    B(new Texture(""), "B"),
-    C(new Texture(""), "C"),
+    A(new Texture("letras/a.png"), 'A'),
+    B(new Texture("letras/b.png"), 'B'),
+    C(new Texture("letras/c.png"), 'C'),/*,
     D(new Texture(""), "D"),
     E(new Texture(""), "E"),
     F(new Texture(""), "F"),
@@ -14,8 +17,8 @@ public enum LetterType {
     I(new Texture(""), "I"),
     J(new Texture(""), "J"),
     K(new Texture(""), "K"),
-    L(new Texture(""), "L"),
-    M(new Texture(""), "M"),
+    L(new Texture(""), "L"),*/
+    M(new Texture("letras/m.png"),'M');/*
     N(new Texture(""), "N"),
     O(new Texture(""), "O"),
     P(new Texture(""), "P"),
@@ -46,5 +49,6 @@ public enum LetterType {
     public char getCharLetter() {
         return charLetter;
     }
+
 
 }
