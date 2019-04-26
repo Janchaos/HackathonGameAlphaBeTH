@@ -28,9 +28,15 @@ public class CollisionDetector {
     }
 
     private void groundCollision() {
-        if (player.getY() < 50) {
-            player.setY(50);
+        if (player.getY() < 40) {
+            player.setY(40);
             playerGrounded();
+        }
+        if(player.getX() > 15600){
+            player.setX(15600);
+        }
+        if(player.getX() < 400){
+            player.setX(400);
         }
     }
 
@@ -51,8 +57,6 @@ public class CollisionDetector {
             if (letter.overlaps(player)) {
                 it.remove();
                 letterBox.catchWords();
-                System.out.println("colliding with letter");
-
             }
         }
     }

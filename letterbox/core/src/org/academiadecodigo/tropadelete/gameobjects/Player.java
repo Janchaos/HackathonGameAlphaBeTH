@@ -78,7 +78,6 @@ public class Player extends GameObjects {
         }
         // If the player stands on the ground
         else if (standOnGround && !canJump) {
-            System.out.println("great nabo");
             // You can't fall down when you stand on a ground
             velocity.y = 50;
             // When you stand on a ground you can jump again

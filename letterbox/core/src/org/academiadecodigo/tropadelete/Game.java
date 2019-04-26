@@ -25,11 +25,14 @@ public class Game extends ApplicationAdapter {
     private Platform[] platforms;
     private Texture background;
     private Music music;
+    private Texture mainScreen;
 
     private boolean gamestart;
 
     @Override
     public void create() {
+
+        gamestart = false;
 
         batch = new SpriteBatch();
         player = new Player(GlobalVariables.RIGHT_RUNNING_TEXTURES[0], new Rectangle());
@@ -45,6 +48,7 @@ public class Game extends ApplicationAdapter {
         background = GlobalVariables.BACKGROUND;
 
         createSound();
+        mainScreen = new Texture("background/block.png");
 
 
         //devia ter variable global akí finito
@@ -59,31 +63,37 @@ public class Game extends ApplicationAdapter {
         letters.get(4).setX(1600);
         letters.get(4).setY(50);
 
+
     }
 
     @Override
     public void render() {
+        if (!gamestart) {
+            batch.begin();
+            batch.draw(mainScreen,0,0);
+            batch.end();
+
+            inputHandler.keyboardListennerStart(this);
+        } else {
+
+            inputHandler.keyboardListenerX();
+            inputHandler.keyboardListenerY();
+            player.jump();
 
 
-        inputHandler.keyboardListenerX();
-        inputHandler.keyboardListenerY();
-        player.jump();
+            camera.position.x = MathUtils.clamp(camera.position.x, camera.viewportWidth / 2f, 0);
+
+            updateCamera();
+            batch.setProjectionMatrix(camera.combined);
+
+            collisionDetector.checkCollision();
+            createImage();
+            if (letterBox.asWon()) {
 
 
-       camera.position.x = MathUtils.clamp(camera.position.x, camera.viewportWidth / 2f, 0);
-
-        updateCamera();
-        batch.setProjectionMatrix(camera.combined);
-
-        collisionDetector.checkCollision();
-
-        if(letterBox.asWon()){
-
-
+            }
         }
 
-        System.out.println(letterBox.asWon());
-        createImage();
     }
 
 
@@ -135,7 +145,7 @@ public class Game extends ApplicationAdapter {
 
     }
 
-    private void createSound(){
+    private void createSound() {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/backgroundSound.mp3"));
         music.setLooping(true);
         music.play();
@@ -177,4 +187,7 @@ public class Game extends ApplicationAdapter {
         batch.draw(platforms[1].getImg(), platforms[1].getX(), platforms[1].getY() - 50);
     }
 
+    public void setGamestart(boolean gamestart) {
+        this.gamestart = gamestart;
+    }
 }

@@ -41,4 +41,9 @@ public class InputHandler {
         }
     }
 
+    public void keyboardListennerStart(Game game){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
+            game.setGamestart(true);
+        }
+    }
 }
