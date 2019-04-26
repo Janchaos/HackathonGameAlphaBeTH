@@ -3,6 +3,8 @@ package org.academiadecodigo.tropadelete;
 import com.badlogic.gdx.graphics.Texture;
 
 public class GlobalVariables {
+    public final static int WINDOW_WITDH = 1280;//800
+    public final static int WINDOW_HEIGHT = 720;//400
 
     public final static Texture[] RIGHT_RUNNING_TEXTURES = new Texture[]{new Texture("player_girl/step1_girl.png"),
                                                                         new Texture("player_girl/step2_girl.png"),

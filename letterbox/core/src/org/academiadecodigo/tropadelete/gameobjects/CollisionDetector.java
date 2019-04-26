@@ -1,5 +1,8 @@
 package org.academiadecodigo.tropadelete.gameobjects;
 
+import com.badlogic.gdx.audio.Sound;
+import org.academiadecodigo.tropadelete.Game;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -58,5 +61,6 @@ public class CollisionDetector {
         player.setJump(false);
         player.setStandOnGround();
     }
+
 
 }

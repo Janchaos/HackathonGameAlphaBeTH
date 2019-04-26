@@ -2,11 +2,12 @@ package org.academiadecodigo.tropadelete;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import org.academiadecodigo.tropadelete.gameobjects.*;
 
@@ -23,6 +24,9 @@ public class Game extends ApplicationAdapter {
     private LinkedList<Letter> letters;
     private Platform[] platforms;
     private Texture background;
+    private Music music;
+
+    private boolean gamestart;
 
     @Override
     public void create() {
@@ -40,6 +44,7 @@ public class Game extends ApplicationAdapter {
 
         background = GlobalVariables.BACKGROUND;
 
+        createSound();
 
 
         //devia ter variable global akí finito
@@ -60,12 +65,23 @@ public class Game extends ApplicationAdapter {
     public void render() {
 
 
-
         inputHandler.keyboardListenerX();
         inputHandler.keyboardListenerY();
         player.jump();
+
+
+       camera.position.x = MathUtils.clamp(camera.position.x, camera.viewportWidth / 2f, 0);
+
         updateCamera();
+        batch.setProjectionMatrix(camera.combined);
+
         collisionDetector.checkCollision();
+
+        if(letterBox.asWon()){
+
+
+        }
+
         System.out.println(letterBox.asWon());
         createImage();
     }
@@ -79,6 +95,7 @@ public class Game extends ApplicationAdapter {
         }
         batch.dispose();
         player.dispose();
+        music.dispose();
 
     }
 
@@ -94,10 +111,9 @@ public class Game extends ApplicationAdapter {
 
         float x = 0;
 
-        batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        batch.draw(background,0,0);
+        batch.draw(background, 0, 0);
 
         renderPlatforms();
         renderLetters();
@@ -116,6 +132,13 @@ public class Game extends ApplicationAdapter {
         batch.draw(player.getImg(), player.getX(), player.getY());
 
         batch.end();
+
+    }
+
+    private void createSound(){
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/backgroundSound.mp3"));
+        music.setLooping(true);
+        music.play();
 
     }
 
@@ -150,8 +173,8 @@ public class Game extends ApplicationAdapter {
 
     private void renderPlatforms() {
 
-        batch.draw(platforms[0].getImg(), platforms[0].getX(), platforms[0].getY()-50);
-        batch.draw(platforms[1].getImg(), platforms[1].getX(),platforms[1].getY()-50);
+        batch.draw(platforms[0].getImg(), platforms[0].getX(), platforms[0].getY() - 50);
+        batch.draw(platforms[1].getImg(), platforms[1].getX(), platforms[1].getY() - 50);
     }
 
 }
