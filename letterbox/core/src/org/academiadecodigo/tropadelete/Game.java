@@ -100,7 +100,7 @@ public class Game extends ApplicationAdapter {
 
         for (int i = 0; i < 5; i++) {
             LetterType letterType = randomLetter();
-            letters.add(new Letter(letterType.getTexture(), letterType.getCharLetter(), (int)Math.floor(Math.random() * 1000), 0));
+            letters.add(new Letter(letterType.getImgPath(), letterType.getCharLetter(), (int)Math.floor(Math.random() * 1000), 0));
 
         }
     }

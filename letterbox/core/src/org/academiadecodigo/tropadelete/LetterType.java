@@ -1,49 +1,44 @@
 package org.academiadecodigo.tropadelete;
 
-import com.badlogic.gdx.graphics.Texture;
-
-import java.util.LinkedList;
-import java.util.List;
-
 public enum LetterType {
-    A (new String("letras/a.png"), 'A'),
-    B (new String("letras/b.png"), 'B'),
-    C (new String("letras/c.png"), 'C');
-    /*D (new String(""), 'D'),
-    E (new String(""), 'E'),
-    F (new String(""), 'F'),
-    G (new String(""), 'G'),
-    H (new String(""), 'H'),
-    I (new String(""), 'I'),
-    J (new String(""), 'J'),
-    K (new String(""), 'K'),
-    L (new String(""), 'L'),
-    M (new String("letras/m.png"), 'M'),
-    N (new String(""), 'N'),
-    O (new String(""), 'O'),
-    P (new String(""), 'P'),
-    Q (new String(""), 'Q'),
-    R (new String(""), 'R'),
-    S (new String(""), 'S'),
-    T (new String(""), 'T'),
-    U (new String(""), 'U'),
-    V (new String(""), 'V'),
-    W (new String(""), 'W'),
-    X (new String(""), 'X'),
-    Y (new String(""), 'Y'),
-    Z (new String(""), 'Z'); */
+    A ("letras/a.png", 'A'),
+    B ("letras/b.png", 'B'),
+    C ("letras/c.png", 'C'),
+    D ("letras/d.png", 'D'),
+    E ("letras/e.png", 'E'),
+    F ("letras/f.png", 'F'),
+    G ("letras/g.png", 'G'),
+    H ("letras/h.png", 'H'),
+    I ("letras/i.png", 'I'),
+    J ("letras/j.png", 'J'),
+    K ("letras/k.png", 'K'),
+    L ("letras/l.png", 'L'),
+    M ("letras/m.png", 'M'),
+    N ("letras/n.png", 'N'),
+    O ("letras/o.png", 'O'),
+    P ("letras/p.png", 'P'),
+    Q ("letras/q.png", 'Q'),
+    R ("letras/r.png", 'R'),
+    S ("letras/s.png", 'S'),
+    T ("letras/t.png", 'T'),
+    U ("letras/u.png", 'U'),
+    V ("letras/v.png", 'V'),
+    W ("letras/w.png", 'W'),
+    X ("letras/x.png", 'X'),
+    Y ("letras/y.png", 'Y'),
+    Z ("letras/z.png", 'Z');
 
-    private String texture;
+    private String imgPath;
     private char charLetter;
 
-    LetterType(String texture, char charLetter) {
+    LetterType(String imgPath, char charLetter) {
         this.charLetter = charLetter;
-        this.texture = texture;
+        this.imgPath = imgPath;
 
     }
 
-    public String getTexture() {
-        return texture;
+    public String getImgPath() {
+        return imgPath;
     }
 
     public char getCharLetter() {
