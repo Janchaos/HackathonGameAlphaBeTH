@@ -1,5 +1,6 @@
 package org.academiadecodigo.tropadelete.gameobjects;
 
+import com.badlogic.gdx.graphics.Texture;
 import org.academiadecodigo.tropadelete.LetterType;
 
 import java.util.LinkedList;
@@ -7,11 +8,11 @@ import java.util.List;
 
 public class LetterBox {
 
-    private List<Letter> letters;
+    private Texture[] letters;
 
     public LetterBox(String word) {
 
-        this.letters = new LinkedList<>();
+        this.letters = new Texture[word.length()];
         splitWord(word);
     }
 
@@ -26,13 +27,13 @@ public class LetterBox {
         for (int i = 0; i < word.length(); i++) {
             for (LetterType letter : LetterType.values()) {
                 if (letter.getCharLetter() == word.charAt(i)) {
-                    this.letters.add(new Letter(letter.getTexture(),letter.getCharLetter(),400,0));
+                    this.letters[i] = letter.getTexture();
                 }
             }
         }
     }
 
-    public List<Letter> getLetters() {
+    public Texture[] getLetters() {
         return letters;
     }
 }
