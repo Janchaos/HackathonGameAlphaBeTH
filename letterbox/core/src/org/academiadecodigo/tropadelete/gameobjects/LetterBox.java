@@ -15,8 +15,8 @@ public class LetterBox {
     public LinkedList<Letter> splitWord(String word) {
 
         this.letters = new Texture[word.length()];
-        this.catchWords = new LinkedList<>();
-        LinkedList<Letter> scrambleLetters = new LinkedList<>();
+        this.catchWords = new LinkedList<Boolean>();
+        LinkedList<Letter> scrambleLetters = new LinkedList<Letter>();
 
         for (int i = 0; i < word.length(); i++) {
             for (LetterType letter : LetterType.values()) {

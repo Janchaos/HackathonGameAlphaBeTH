@@ -50,7 +50,7 @@ public class InputHandler {
 
     public void keyboardListennerSound(Sound wordSound){
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            System.exit(1);
+           Gdx.app.exit();
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
         wordSound.play();
