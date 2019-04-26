@@ -4,10 +4,12 @@ public class CollisionDetector {
 
     private LetterBox letterBox;
     private Player player;
+    private Platform[] platforms;
 
-    public CollisionDetector(LetterBox letterBox, Player player) {
+    public CollisionDetector(LetterBox letterBox, Player player, Platform[] platforms) {
         this.letterBox = letterBox;
         this.player = player;
+        this.platforms = platforms;
     }
 
     public void checkCollision(){
@@ -19,11 +21,17 @@ public class CollisionDetector {
         if(player.getY()<=0){
             player.setY(0);
             player.setJump(false);
-            player.setStandOnGround(true);
+            player.setStandOnGround();
         }
     }
 
-    private void tileCollision() {
+    private void platformsCollision() {
+        for (Platform platform : platforms){
+            if(player.overlaps(platform)){
+                player.setY(platform.getY());
+                player.setStandOnGround();
+            }
+        }
 
     }
 
@@ -31,7 +39,7 @@ public class CollisionDetector {
         for (Letter letter : letterBox.getLetters()){
             if (letter.overlaps(player)) {
                 letter.setCaught();
-                letter.dispose();
+
                 letter.getImg().dispose();
             }
         }

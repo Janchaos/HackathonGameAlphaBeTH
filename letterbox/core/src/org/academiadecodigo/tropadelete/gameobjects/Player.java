@@ -11,12 +11,12 @@ public class Player extends GameObjects {
     public final int JUMP_HEIGHT = 300;
 
 
-    Vector2 gravity = new Vector2(0, -5);
-    Vector2 velocity = new Vector2();
+    private Vector2 gravity = new Vector2(0, -5);
+    private Vector2 velocity = new Vector2();
 
-    boolean jump = false;
-    boolean canJump = true;
-    boolean standOnGround = true;
+    private boolean jump = false;
+    private boolean canJump = true;
+    private boolean standOnGround = true;
 
 
     public Player(Texture img, Rectangle hitbox) {
@@ -25,7 +25,7 @@ public class Player extends GameObjects {
     }
 
     //GLOBAL VARIABLES will do this later
-    private void init(){
+    private void init() {
         hitbox.x = 0;
         hitbox.y = 0;
         hitbox.width = 100;
@@ -88,7 +88,7 @@ public class Player extends GameObjects {
         this.jump = jump;
     }
 
-    public void setStandOnGround(boolean standOnGround) {
-        this.standOnGround = standOnGround;
+    public void setStandOnGround() {
+        this.standOnGround = true;
     }
 }
