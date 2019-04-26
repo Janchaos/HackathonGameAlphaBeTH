@@ -108,8 +108,7 @@ public class Player extends GameObjects {
     }
 
     public void runRightLastTexture() {
-
-        System.out.println(lastTexture);
+        
 
         if (TimeUtils.nanoTime() - lastTexture > TimeUtils.millisToNanos(100)) {
 
