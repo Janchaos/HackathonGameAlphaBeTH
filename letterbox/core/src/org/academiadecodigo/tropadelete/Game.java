@@ -27,7 +27,7 @@ public class Game extends ApplicationAdapter {
     public void create() {
 
         batch = new SpriteBatch();
-        player = new Player(new Texture("badlogic.jpg"), new Rectangle());
+        player = new Player(GlobalVariables.RIGHT_RUNNING_TEXTURES[0], new Rectangle());
         letterBox = new LetterBox("CACA");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);

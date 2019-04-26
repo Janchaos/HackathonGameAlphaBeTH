@@ -21,7 +21,6 @@ public class LetterBox {
         letter.setCaught();
     }
 
-    //syntaxe pode variar
     public void splitWord(String word) {
 
         for (int i = 0; i < word.length(); i++) {
