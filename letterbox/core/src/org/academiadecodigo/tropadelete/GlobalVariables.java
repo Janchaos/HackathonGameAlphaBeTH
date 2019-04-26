@@ -33,11 +33,16 @@ public class GlobalVariables {
                                                                           new Texture("player_girl/step9_girl_left.png"),
                                                                              new Texture("player_girl/step10_girl_left.png")};
 */
-    public final static Texture SKY = new Texture("background/sky.png");
+
+    public final static Texture BACKGROUND = new Texture("background/background.png");
+   /* public final static Texture SKY = new Texture("background/sky.png");
     public final static Texture GROUND = new Texture("background/ground.png");
     public final static Texture SIERRA = new Texture("background/sierra.png");
-    public final static Texture BUSH = new Texture("background/bush.png");
+    public final static Texture BUSH = new Texture("background/bush.png");*/
 
     public final static String PLATFORM_BLOCK = "background/block.png";
     public final static String PLATFORM_BIG_BLOCK = "background/bigblock.png";
+
+    public final static float BLOCK_HEIGHT = 10;
+    public final static float BLOCK_WIDTH = 225;
 }

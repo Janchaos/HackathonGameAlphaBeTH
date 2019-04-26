@@ -20,22 +20,22 @@ public class CollisionDetector {
     public void checkCollision() {
         groundCollision();
         letterCollision();
+        platformsCollision();
 
     }
 
     private void groundCollision() {
         if (player.getY() < 50) {
             player.setY(50);
-            player.setJump(false);
-            player.setStandOnGround();
+            playerGrounded();
         }
     }
 
     private void platformsCollision() {
         for (Platform platform : platforms) {
             if (player.overlaps(platform)) {
-                player.setY(platform.getY());
-                player.setStandOnGround();
+                player.setY(platform.getY() + platform.getHeight());
+                playerGrounded();
             }
         }
 
@@ -54,5 +54,9 @@ public class CollisionDetector {
         }
     }
 
+    private void playerGrounded(){
+        player.setJump(false);
+        player.setStandOnGround();
+    }
 
 }

@@ -22,7 +22,7 @@ public class Game extends ApplicationAdapter {
     private CollisionDetector collisionDetector;
     private LinkedList<Letter> letters;
     private Platform[] platforms;
-    private Texture[] background;
+    private Texture background;
 
     @Override
     public void create() {
@@ -35,12 +35,12 @@ public class Game extends ApplicationAdapter {
 
         inputHandler = new InputHandler(player);
         letters = letterBox.splitWord("HELLO");
-
+        loadPlatforms();
         collisionDetector = new CollisionDetector(letters, player, platforms, letterBox);
 
-        background = new Texture[]{GlobalVariables.SKY, GlobalVariables.GROUND,
-                GlobalVariables.SIERRA, GlobalVariables.BUSH};
-        loadPlatforms();
+        background = GlobalVariables.BACKGROUND;
+
+
 
         //devia ter variable global akí finito
         letters.get(0).setX(50);
@@ -97,7 +97,8 @@ public class Game extends ApplicationAdapter {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        drawBackground();
+        batch.draw(background,0,0);
+
         renderPlatforms();
         renderLetters();
 
@@ -143,19 +144,14 @@ public class Game extends ApplicationAdapter {
 
     private void loadPlatforms() {
         platforms = new Platform[2];
-        platforms[0] = new Platform(new Texture(GlobalVariables.PLATFORM_BLOCK), new Rectangle());
-        platforms[1] = new Platform(new Texture(GlobalVariables.PLATFORM_BIG_BLOCK), new Rectangle());
+        platforms[0] = new Platform(new Texture(GlobalVariables.PLATFORM_BLOCK), 1000, 300);
+        platforms[1] = new Platform(new Texture(GlobalVariables.PLATFORM_BIG_BLOCK), 500, 100);
     }
 
     private void renderPlatforms() {
 
-        batch.draw(platforms[0].getImg(), 500, 100);
-        batch.draw(platforms[1].getImg(), 1000, 200);
+        batch.draw(platforms[0].getImg(), platforms[0].getX(), platforms[0].getY()-50);
+        batch.draw(platforms[1].getImg(), platforms[1].getX(),platforms[1].getY()-50);
     }
 
-    private void drawBackground() {
-        for (Texture img : background) {
-            batch.draw(img, 0, 0);
-        }
-    }
 }
