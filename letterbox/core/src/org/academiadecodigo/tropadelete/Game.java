@@ -22,21 +22,25 @@ public class Game extends ApplicationAdapter {
     private CollisionDetector collisionDetector;
     private LinkedList<Letter> letters;
     private Platform[] platforms;
+    private Texture[] background;
 
     @Override
     public void create() {
 
         batch = new SpriteBatch();
         player = new Player(GlobalVariables.RIGHT_RUNNING_TEXTURES[0], new Rectangle());
-        letterBox = new LetterBox("CACA");
+        letterBox = new LetterBox();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
 
         inputHandler = new InputHandler(player);
-        letters = new LinkedList<>();
-        spawnLetters();
+        letters = letterBox.splitWord("HELLO");
 
-        collisionDetector = new CollisionDetector(letters, player,platforms);
+        collisionDetector = new CollisionDetector(letters, player, platforms,letterBox);
+
+        background = new Texture[]{GlobalVariables.SKY, GlobalVariables.GROUND,
+                GlobalVariables.SIERRA, GlobalVariables.BUSH};
+        loadPlatforms();
     }
 
     @Override
@@ -44,17 +48,20 @@ public class Game extends ApplicationAdapter {
 
         updateCamera();
 
+
         createImage();
-        inputHandler.keyboardListener();
+        inputHandler.keyboardListenerX();
+        inputHandler.keyboardListenerY();
         player.jump();
         collisionDetector.checkCollision();
+        System.out.println(letterBox.asWon());
     }
 
 
     @Override
     public void dispose() {
 
-        for (Letter letter : letters){
+        for (Letter letter : letters) {
             letter.dispose();
         }
         batch.dispose();
@@ -71,17 +78,19 @@ public class Game extends ApplicationAdapter {
 
     private void createImage() {
 
+        float x = 0;
 
         batch.setProjectionMatrix(camera.combined);
 
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(new Texture("back.jpg"), 0, 0);
+        drawBackground();
+        renderPlatforms();
+        renderLetters();
 
         int index = 0;
         for (int i = 0; i < letterBox.getLetters().length; i++) {
-            batch.draw(letterBox.getLetters()[i], camera.position.x + index, camera.position.y + 100);
+            batch.draw(letterBox.getLetters()[i], camera.position.x + index - 300, camera.position.y + 100);
+            System.out.println(camera.position.x);
             index += 112;
         }
 
@@ -96,26 +105,46 @@ public class Game extends ApplicationAdapter {
 
     }
 
-    private void spawnLetters() {
+    private void renderLetters() {
+
+        for (Letter letter : letters) {
+            batch.draw(letter.getImg(), letter.getX(), letter.getY());
+        }
+
+
+    }
+
+    /*private void spawnLetters() {
 
         for (int i = 0; i < 5; i++) {
             LetterType letterType = randomLetter();
             letters.add(new Letter(letterType.getImgPath(), letterType.getCharLetter(), (int)Math.floor(Math.random() * 1000), 0));
 
         }
-    }
+    }*/
 
-    private LetterType randomLetter() {
+    /*private LetterType randomLetter() {
 
         return LetterType.values()[(int)Math.floor(Math.random() * LetterType.values().length)];
+    }*/
+
+    private void loadPlatforms() {
+        platforms = new Platform[2];
+        platforms[0] = new Platform(new Texture(GlobalVariables.PLATFORM_BLOCK), new Rectangle());
+        platforms[1] = new Platform(new Texture(GlobalVariables.PLATFORM_BIG_BLOCK), new Rectangle());
     }
 
-    private void loadPlatforms(){
-        platforms = new Platform[1];
-        platforms[0] = new Platform(new Texture("/letras/m.png"),new Rectangle());
+    private void renderPlatforms() {
+
+
+
+        batch.draw(platforms[0].getImg(), 500, 100);
+        batch.draw(platforms[1].getImg(), 1000, 200);
     }
 
-    private void renderPlatforms (){
-
+    private void drawBackground(){
+        for (Texture img : background){
+            batch.draw(img,0,0);
+        }
     }
 }

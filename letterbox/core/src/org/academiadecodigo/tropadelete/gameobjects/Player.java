@@ -18,9 +18,9 @@ public class Player extends GameObjects {
     Vector2 gravity = new Vector2(0, -5);
     Vector2 velocity = new Vector2();
 
-    boolean jump = false;
-    boolean canJump = true;
-    boolean standOnGround = true;
+    private boolean jump = false;
+    private boolean canJump = true;
+    private boolean standOnGround = true;
 
 
     public Player(Texture img, Rectangle hitbox) {
@@ -32,8 +32,8 @@ public class Player extends GameObjects {
     }
 
     private void init() {
-        hitbox.x = 0;
-        hitbox.y = 0;
+        hitbox.x = 100;
+        hitbox.y = 50;
         hitbox.width = 100;
         hitbox.height = 100;
     }
@@ -80,7 +80,7 @@ public class Player extends GameObjects {
         else if (standOnGround && !canJump) {
             System.out.println("great nabo");
             // You can't fall down when you stand on a ground
-            velocity.y = 0;
+            velocity.y = 50;
             // When you stand on a ground you can jump again
             canJump = true;
             img = GlobalVariables.RIGHT_JUMPING_TEXTURES[2];
@@ -101,6 +101,9 @@ public class Player extends GameObjects {
 
 
     public void runRightLastTexture() {
+        if(jump){
+            return;
+        }
 
         if (TimeUtils.nanoTime() - lastTexture > TimeUtils.millisToNanos(100)) {
 
@@ -160,5 +163,9 @@ public class Player extends GameObjects {
 
     public void setStandOnGround() {
         this.standOnGround = true;
+    }
+
+    public void setStill(Texture img) {
+        this.img = img;
     }
 }

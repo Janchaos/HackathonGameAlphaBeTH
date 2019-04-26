@@ -8,11 +8,13 @@ public class CollisionDetector {
     private LinkedList<Letter> word;
     private Player player;
     private Platform[] platforms;
+    private LetterBox letterBox;
 
-    public CollisionDetector(LinkedList<Letter> letters, Player player, Platform[] platforms) {
+    public CollisionDetector(LinkedList<Letter> letters, Player player, Platform[] platforms, LetterBox letterBox) {
         this.word = letters;
         this.player = player;
         this.platforms = platforms;
+        this.letterBox = letterBox;
     }
 
     public void checkCollision() {
@@ -22,8 +24,8 @@ public class CollisionDetector {
     }
 
     private void groundCollision() {
-        if (player.getY() <= 0) {
-            player.setY(0);
+        if (player.getY() < 50) {
+            player.setY(50);
             player.setJump(false);
             player.setStandOnGround();
         }
@@ -45,6 +47,7 @@ public class CollisionDetector {
             Letter letter = it.next();
             if (letter.overlaps(player)) {
                 it.remove();
+                letterBox.catchWords();
                 System.out.println("colliding with letter");
 
             }

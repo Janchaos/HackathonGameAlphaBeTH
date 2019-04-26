@@ -10,8 +10,8 @@ public class Letter extends GameObjects {
     public static final float HEIGHT = 50;
     public static final float WIDTH = 30;
 
-    public Letter(Texture img, char letter, float x, float y) {
-        super(img, new Rectangle(x, y, WIDTH, HEIGHT));
+    public Letter(Texture img, char letter) {
+        super(img, new Rectangle(500,50, WIDTH, HEIGHT));
         this.isCaught = false;
         this.letter = letter;
     }

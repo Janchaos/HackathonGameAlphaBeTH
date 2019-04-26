@@ -13,17 +13,26 @@ public class InputHandler {
         this.player = player;
     }
 
-    public void keyboardListener() {
+    public void keyboardListenerX() {
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 
             player.moveRight();
+            return;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 
             player.moveLeft();
+            return;
         }
+
+        player.setStill(GlobalVariables.RIGHT_RUNNING_TEXTURES[0]);
+
+
+    }
+
+    public void keyboardListenerY() {
 
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
 
