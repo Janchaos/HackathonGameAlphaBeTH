@@ -36,8 +36,8 @@ public class Game extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        player = new Player(new Texture("badlogic.jpg"), new Rectangle());
-        letterBox = new LetterBox("CACA");
+        player = new Player(new Texture("player_girl/step1_girl.png"), new Rectangle());
+        letterBox = new LetterBox("CAAAAA");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
 
@@ -76,6 +76,8 @@ public class Game extends ApplicationAdapter {
 
     private void createImage() {
 
+        float x = 0;
+
         batch.setProjectionMatrix(camera.combined);
 
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -85,9 +87,30 @@ public class Game extends ApplicationAdapter {
 
         int index = 0;
         for (int i = 0; i < letterBox.getLetters().length; i++) {
-            batch.draw(letterBox.getLetters()[i], camera.position.x + index, camera.position.y + 100);
+            batch.draw(letterBox.getLetters()[i], camera.position.x + index - 300, camera.position.y +100);
+            System.out.println(camera.position.x);
             index += 112;
         }
+
+
+
+
+        /*7 if (letterBox.getWord().length() == 4) {
+            batch.draw(letterBox.getLetters()[0], camera.position.x -150, camera.position.y+ 100);
+            x = camera.position.x -150;
+        }
+
+        if (letterBox.getWord().length() == 6) {
+            batch.draw(letterBox.getLetters()[0], camera.position.x + -150, camera.position.y+ 100);
+            x = camera.position.x + 400 - 428;
+        }*/
+
+
+        /*for (int i = 1; i < letterBox.getLetters().length; i++) {
+
+            batch.draw(letterBox.getLetters()[i], x + index, camera.position.y + 100);
+            index -= 112;
+        }*/
 
         for (Letter letter : initialLetters) {
 
@@ -104,13 +127,15 @@ public class Game extends ApplicationAdapter {
 
         for (int i = 0; i < 5; i++) {
             LetterType letterType = randomLetter();
-            initialLetters[i] = new Letter(letterType.getTexture(), letterType.getCharLetter(), (int)Math.floor(Math.random() * 1000), 0);
+            initialLetters[i] = new Letter(letterType.getTexture(), letterType.getCharLetter(), (int) Math.floor(Math.random() * 1000), 0);
 
         }
     }
 
     private LetterType randomLetter() {
 
-        return LetterType.values()[(int)Math.floor(Math.random() * LetterType.values().length)];
+        return LetterType.values()[(int) Math.floor(Math.random() * LetterType.values().length)];
     }
+
+
 }

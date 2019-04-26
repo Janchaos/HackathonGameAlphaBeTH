@@ -8,12 +8,16 @@ import java.util.List;
 
 public class LetterBox {
 
-    private Texture[] letters;
+
+    private String word;
+    private Letter[] letters;
+    p
 
     public LetterBox(String word) {
 
         this.letters = new Texture[word.length()];
         splitWord(word);
+        this.word = word;
     }
 
     public void addLetter(Letter letter) {
@@ -28,6 +32,7 @@ public class LetterBox {
             for (LetterType letter : LetterType.values()) {
                 if (letter.getCharLetter() == word.charAt(i)) {
                     this.letters[i] = letter.getTexture();
+
                 }
             }
         }
@@ -35,5 +40,8 @@ public class LetterBox {
 
     public Texture[] getLetters() {
         return letters;
+    }
+    public String getWord() {
+        return word;
     }
 }
