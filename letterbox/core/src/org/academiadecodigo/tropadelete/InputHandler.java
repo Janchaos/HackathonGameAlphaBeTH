@@ -3,6 +3,7 @@ package org.academiadecodigo.tropadelete;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import org.academiadecodigo.tropadelete.gameobjects.Player;
 
 public class InputHandler {
@@ -44,6 +45,15 @@ public class InputHandler {
     public void keyboardListennerStart(Game game){
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
             game.setGamestart(true);
+        }
+    }
+
+    public void keyboardListennerSound(Sound wordSound){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            System.exit(1);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
+        wordSound.play();
         }
     }
 }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import org.academiadecodigo.tropadelete.gameobjects.*;
 
@@ -26,6 +25,8 @@ public class Game extends ApplicationAdapter {
     private Texture background;
     private Music music;
     private Texture mainScreen;
+    private Texture endScreen;
+    private Sound wordSound;
 
     private boolean gamestart;
 
@@ -48,19 +49,20 @@ public class Game extends ApplicationAdapter {
         background = GlobalVariables.BACKGROUND;
 
         createSound();
-        mainScreen = new Texture("background/block.png");
-
+        mainScreen = new Texture("background/begin.png");
+        endScreen = new Texture("background/winner.png");
+        wordSound = Gdx.audio.newSound(Gdx.files.internal("music/hello.mp3"));
 
         //devia ter variable global akí finito
-        letters.get(0).setX(50);
+        letters.get(0).setX(400);
         letters.get(0).setY(50);
-        letters.get(1).setX(400);
+        letters.get(1).setX(800);
         letters.get(1).setY(50);
-        letters.get(2).setX(800);
+        letters.get(2).setX(1200);
         letters.get(2).setY(50);
-        letters.get(3).setX(1200);
-        letters.get(3).setY(50);
-        letters.get(4).setX(1600);
+        letters.get(3).setX(1600);
+        letters.get(3).setY(550);
+        letters.get(4).setX(2000);
         letters.get(4).setY(50);
 
 
@@ -70,31 +72,34 @@ public class Game extends ApplicationAdapter {
     public void render() {
         if (!gamestart) {
             batch.begin();
-            batch.draw(mainScreen,0,0);
+            batch.draw(mainScreen, 0, 0);
             batch.end();
 
             inputHandler.keyboardListennerStart(this);
-        } else {
 
+
+        } else if (letterBox.asWon()) {
+
+            batch.begin();
+            batch.draw(endScreen,camera.position.x-400,camera.position.y-240);
+            batch.end();
+
+            inputHandler.keyboardListennerSound( wordSound);
+
+        } else {
             inputHandler.keyboardListenerX();
             inputHandler.keyboardListenerY();
             player.jump();
 
-
-            camera.position.x = MathUtils.clamp(camera.position.x, camera.viewportWidth / 2f, 0);
 
             updateCamera();
             batch.setProjectionMatrix(camera.combined);
 
             collisionDetector.checkCollision();
             createImage();
-            if (letterBox.asWon()) {
-
-
-            }
         }
-
     }
+
 
 
     @Override
@@ -103,9 +108,15 @@ public class Game extends ApplicationAdapter {
         for (Letter letter : letters) {
             letter.dispose();
         }
+        for (Platform platform : platforms){
+            platform.dispose();
+        }
+        mainScreen.dispose();
+        background.dispose();
         batch.dispose();
         player.dispose();
         music.dispose();
+        endScreen.dispose();
 
     }
 
@@ -161,24 +172,11 @@ public class Game extends ApplicationAdapter {
 
     }
 
-    /*private void spawnLetters() {
-
-        for (int i = 0; i < 5; i++) {
-            LetterType letterType = randomLetter();
-            letters.add(new Letter(letterType.getImgPath(), letterType.getCharLetter(), (int)Math.floor(Math.random() * 1000), 0));
-
-        }
-    }*/
-
-    /*private LetterType randomLetter() {
-
-        return LetterType.values()[(int)Math.floor(Math.random() * LetterType.values().length)];
-    }*/
 
     private void loadPlatforms() {
         platforms = new Platform[2];
-        platforms[0] = new Platform(new Texture(GlobalVariables.PLATFORM_BLOCK), 1000, 300);
-        platforms[1] = new Platform(new Texture(GlobalVariables.PLATFORM_BIG_BLOCK), 500, 100);
+        platforms[0] = new Platform(new Texture(GlobalVariables.PLATFORM_BLOCK), 1400, 250);
+        platforms[1] = new Platform(new Texture(GlobalVariables.PLATFORM_BLOCK), 1600, 500);
     }
 
     private void renderPlatforms() {
