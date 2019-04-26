@@ -5,19 +5,13 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Letter extends GameObjects {
 
+    private char letter;
+    public static final float HEIGHT = 50;
+    public static final float WIDTH = 30;
 
-    private boolean isCaugth;
-
-    public Letter(Texture img, Rectangle hitbox) {
-        super(img, hitbox);
-        this.isCaugth = false;
+    public Letter(Texture img, char letter) {
+        super(img, new Rectangle(0,1000, WIDTH, HEIGHT));
+        this.letter = letter;
     }
 
-    public void setCaugth() {
-        isCaugth = true;
-    }
-
-    public boolean isCaugth(){
-        return isCaugth;
-    }
 }

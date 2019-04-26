@@ -12,7 +12,7 @@ public abstract class GameObjects {
         this.hitbox = hitbox;
     }
 
-    public void dispose(){
+    public void dispose() {
         img.dispose();
     }
 
@@ -32,19 +32,32 @@ public abstract class GameObjects {
         this.hitbox = hitbox;
     }
 
-    public float getX(){
+    public float getX() {
         return hitbox.x;
     }
 
-    public float getY(){
-        return  hitbox.y;
+    public float getY() {
+        return hitbox.y;
     }
 
-    public float getHeight(){
+    public void setX(float x){
+        hitbox.x = x;
+    }
+
+    public void setY(float y){
+        hitbox.y = y;
+    }
+
+    public float getHeight() {
         return hitbox.height;
     }
 
-    public float getWidth(){
+    public float getWidth() {
         return hitbox.width;
     }
+
+    public boolean overlaps(GameObjects gameObject) {
+        return hitbox.overlaps(gameObject.hitbox);
+    }
+
 }
