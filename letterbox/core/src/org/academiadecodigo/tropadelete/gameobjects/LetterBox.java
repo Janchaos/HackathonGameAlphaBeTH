@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import java.util.LinkedList;
 import java.util.List;
-
+/*
 public class LetterBox {
 
     private List<Letter> letters;
@@ -34,3 +34,4 @@ public class LetterBox {
     }
 
 }
+*/
